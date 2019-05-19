@@ -13,6 +13,9 @@ public class Movie {
     @SerializedName("Plot")
     public String plop;
 
+    @SerializedName("Poster")
+    public String poster;
+
     public String getTitle() {
         return title;
     }
@@ -35,5 +38,13 @@ public class Movie {
 
     public void setPlop(String plop) {
         this.plop = plop;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
     }
 }

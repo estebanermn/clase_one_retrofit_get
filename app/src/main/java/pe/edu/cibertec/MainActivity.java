@@ -3,9 +3,13 @@ package pe.edu.cibertec;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     Button btSearch;
     TextInputEditText etMovie;
     TextView tvTitle, tvYear, tvPlop;
+    ImageView ivPoster;
 
 
     @Override
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         tvTitle = findViewById(R.id.tvTitle);
         tvYear = findViewById(R.id.tvYear);
         tvPlop = findViewById(R.id.tvPlot);
+        ivPoster = findViewById(R.id.ivPoster);
 
         btSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,17 +56,21 @@ public class MainActivity extends AppCompatActivity {
                 methodSearch.enqueue(new Callback<Movie>() {
                     @Override
                     public void onResponse(Call<Movie> call, Response<Movie> response) {
-                        if(response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             Movie movie = response.body();
                             tvTitle.setText(movie.getTitle());
                             tvYear.setText(movie.getYear());
                             tvPlop.setText(movie.getPlop());
+
+                            Glide.with(MainActivity.this)
+                                    .load(movie.getPoster())
+                                    .into(ivPoster);
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Movie> call, Throwable t) {
-
+                        Log.d("Error", t.toString());
                     }
                 });
             }
