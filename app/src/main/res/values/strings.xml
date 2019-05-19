@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MoviAPI</string>
+    <string name="hint_movie">Ingrese la pelicula</string>
+    <string name="bt_search">Buscar</string>
+</resources>
